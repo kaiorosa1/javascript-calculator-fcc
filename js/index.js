@@ -12,12 +12,22 @@ class App extends React.Component {
 class Calculator extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      text: 'display text' };
+
+    this.changeDisplay = this.changeDisplay.bind(this);
   }
+  changeDisplay(newText) {
+    this.setState({
+      text: newText });
+
+  }
+
   render() {
     return (
       React.createElement("div", { id: "calculator" },
-      React.createElement(Display, null),
-      React.createElement(CalculatorPad, null)));
+      React.createElement(Display, { text: this.state.text }),
+      React.createElement(CalculatorPad, { changeDisplay: this.changeDisplay })));
 
 
   }}
@@ -30,7 +40,7 @@ class Display extends React.Component {
   render() {
     return (
       React.createElement("div", null,
-      React.createElement("h2", { id: "display" }, "Display Component")));
+      React.createElement("h2", { id: "display" }, this.props.text)));
 
 
   }}
@@ -39,13 +49,17 @@ class Display extends React.Component {
 class CalculatorPad extends React.Component {
   constructor(props) {
     super(props);
+    this.sendToDisplay = this.sendToDisplay.bind(this);
+  }
+  sendToDisplay(e) {
+    this.props.changeDisplay(e.target.id);
   }
   render() {
     return (
       React.createElement("div", { id: "pad" },
       React.createElement("h2", null, "Pad Component"),
       React.createElement("div", { id: "numbers" },
-      React.createElement("div", { id: "zero" }, "0"),
+      React.createElement("div", { onClick: this.sendToDisplay, id: "zero" }, "0"),
       React.createElement("div", { id: "one" }, "1"),
       React.createElement("div", { id: "two" }, "2"),
       React.createElement("div", { id: "three" }, "3"),
