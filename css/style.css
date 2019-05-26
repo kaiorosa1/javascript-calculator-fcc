@@ -1,3 +1,19 @@
-#app{
+#app {
   text-align: center;
+}
+#calculator {
+  border: 5px solid black;
+}
+#display {
+  border: 5px solid cyan;
+}
+#pad {
+  border: 5px solid blue;
+}
+#numbers {
+  border: 5px solid green;
+}
+
+#functionality {
+  border: 5px solid purple;
 }

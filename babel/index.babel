@@ -1,11 +1,74 @@
 class App extends React.Component {
-  render(){
-    return(
+  render() {
+    return (
       <div>
         <h1>JavaScript Calculator</h1>
+        <Calculator />
       </div>
     );
   }
 }
 
-ReactDOM.render(<App/>, document.getElementById('app'));
+class Calculator extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div id="calculator">
+        <Display />
+        <CalculatorPad />
+      </div>
+    );
+  }
+}
+
+class Display extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h2 id="display">Display Component</h2>
+      </div>
+    );
+  }
+}
+
+class CalculatorPad extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div id="pad">
+        <h2>Pad Component</h2>
+        <div id="numbers">
+          <div id="zero">0</div>
+          <div id="one">1</div>
+          <div id="two">2</div>
+          <div id="three">3</div>
+          <div id="four">4</div>
+          <div id="five">5</div>
+          <div id="six">6</div>
+          <div id="seven">7</div>
+          <div id="eight">8</div>
+          <div id="nine">9</div>
+        </div>
+        <div id="functionality">
+          <div id="decimal">.</div>
+          <div id="clear">AC</div>
+          <div id="multiply">X</div>
+          <div id="divide">/</div>
+          <div id="add">+</div>
+          <div id="subtract">-</div>
+          <div>Ans</div>
+          <div id="equals">=</div>
+        </div>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById("app"));
