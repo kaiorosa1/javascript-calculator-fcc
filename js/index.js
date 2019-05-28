@@ -13,7 +13,7 @@ class Calculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "" };
+      text: "0" };
 
     this.changeDisplay = this.changeDisplay.bind(this);
   }
@@ -64,7 +64,7 @@ class CalculatorPad extends React.Component {
     this.props.changeDisplay(displayedData);
   }
   clearDisplay() {
-    this.props.changeDisplay("");
+    this.props.changeDisplay("0");
   }
   render() {
     return (
