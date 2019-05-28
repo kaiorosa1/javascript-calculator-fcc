@@ -13,7 +13,7 @@ class Calculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "0"
+      text: " "
     };
     this.changeDisplay = this.changeDisplay.bind(this);
   }
@@ -54,17 +54,28 @@ class CalculatorPad extends React.Component {
     super(props);
     this.sendToDisplay = this.sendToDisplay.bind(this);
     this.clearDisplay = this.clearDisplay.bind(this);
+    this.getOperator = this.getOperator.bind(this);
   }
   sendToDisplay(e) {
     const displayText = this.props.text;
     const dataValue = document
       .getElementById(e.target.id)
       .getAttribute("data-value");
-    const displayedData = displayText.concat(dataValue);
+    let displayedData;
+    
+    displayedData = displayText.concat(dataValue);
     this.props.changeDisplay(displayedData);
   }
   clearDisplay() {
     this.props.changeDisplay("0");
+  }
+  
+  getOperator(e){
+    // Testing out 
+    let num = this.props.text;
+    alert(num);
+    alert(e.target.id);
+   
   }
   render() {
     return (
@@ -109,7 +120,7 @@ class CalculatorPad extends React.Component {
           </div>
           <div id="multiply">X</div>
           <div id="divide">/</div>
-          <div id="add">+</div>
+          <div id="add" onClick={this.getOperator}>+</div>
           <div id="subtract">-</div>
           <div>Ans</div>
           <div id="equals">=</div>
