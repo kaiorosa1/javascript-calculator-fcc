@@ -13,7 +13,7 @@ class Calculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: 'display text' };
+      text: "" };
 
     this.changeDisplay = this.changeDisplay.bind(this);
   }
@@ -27,7 +27,10 @@ class Calculator extends React.Component {
     return (
       React.createElement("div", { id: "calculator" },
       React.createElement(Display, { text: this.state.text }),
-      React.createElement(CalculatorPad, { changeDisplay: this.changeDisplay })));
+      React.createElement(CalculatorPad, {
+        text: this.state.text,
+        changeDisplay: this.changeDisplay })));
+
 
 
   }}
@@ -50,11 +53,18 @@ class CalculatorPad extends React.Component {
   constructor(props) {
     super(props);
     this.sendToDisplay = this.sendToDisplay.bind(this);
+    this.clearDisplay = this.clearDisplay.bind(this);
   }
   sendToDisplay(e) {
-    let displayText;
-    const getDataValue = document.getElementById(e.target.id).getAttribute("data-value");
-    this.props.changeDisplay(getDataValue);
+    const displayText = this.props.text;
+    const dataValue = document.
+    getElementById(e.target.id).
+    getAttribute("data-value");
+    const displayedData = displayText.concat(dataValue);
+    this.props.changeDisplay(displayedData);
+  }
+  clearDisplay() {
+    this.props.changeDisplay("");
   }
   render() {
     return (
@@ -62,19 +72,41 @@ class CalculatorPad extends React.Component {
       React.createElement("h2", null, "Pad Component"),
       React.createElement("div", { id: "numbers" },
       React.createElement("div", { id: "zero", onClick: this.sendToDisplay, "data-value": "0" }, "0"),
+
+
       React.createElement("div", { id: "one", onClick: this.sendToDisplay, "data-value": "1" }, "1"),
+
+
       React.createElement("div", { id: "two", onClick: this.sendToDisplay, "data-value": "2" }, "2"),
+
+
       React.createElement("div", { id: "three", onClick: this.sendToDisplay, "data-value": "3" }, "3"),
+
+
       React.createElement("div", { id: "four", onClick: this.sendToDisplay, "data-value": "4" }, "4"),
+
+
       React.createElement("div", { id: "five", onClick: this.sendToDisplay, "data-value": "5" }, "5"),
+
+
       React.createElement("div", { id: "six", onClick: this.sendToDisplay, "data-value": "6" }, "6"),
+
+
       React.createElement("div", { id: "seven", onClick: this.sendToDisplay, "data-value": "7" }, "7"),
+
+
       React.createElement("div", { id: "eight", onClick: this.sendToDisplay, "data-value": "8" }, "8"),
+
+
       React.createElement("div", { id: "nine", onClick: this.sendToDisplay, "data-value": "9" }, "9")),
+
+
 
       React.createElement("div", { id: "functionality" },
       React.createElement("div", { id: "decimal" }, "."),
-      React.createElement("div", { id: "clear" }, "AC"),
+      React.createElement("div", { id: "clear", onClick: this.clearDisplay }, "AC"),
+
+
       React.createElement("div", { id: "multiply" }, "X"),
       React.createElement("div", { id: "divide" }, "/"),
       React.createElement("div", { id: "add" }, "+"),

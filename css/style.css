@@ -6,6 +6,7 @@
 }
 #display {
   border: 5px solid cyan;
+  height: 40px;
 }
 #pad {
   border: 5px solid blue;
