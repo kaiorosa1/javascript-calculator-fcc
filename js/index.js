@@ -52,23 +52,25 @@ class CalculatorPad extends React.Component {
     this.sendToDisplay = this.sendToDisplay.bind(this);
   }
   sendToDisplay(e) {
-    this.props.changeDisplay(e.target.id);
+    let displayText;
+    const getDataValue = document.getElementById(e.target.id).getAttribute("data-value");
+    this.props.changeDisplay(getDataValue);
   }
   render() {
     return (
       React.createElement("div", { id: "pad" },
       React.createElement("h2", null, "Pad Component"),
       React.createElement("div", { id: "numbers" },
-      React.createElement("div", { onClick: this.sendToDisplay, id: "zero" }, "0"),
-      React.createElement("div", { id: "one" }, "1"),
-      React.createElement("div", { id: "two" }, "2"),
-      React.createElement("div", { id: "three" }, "3"),
-      React.createElement("div", { id: "four" }, "4"),
-      React.createElement("div", { id: "five" }, "5"),
-      React.createElement("div", { id: "six" }, "6"),
-      React.createElement("div", { id: "seven" }, "7"),
-      React.createElement("div", { id: "eight" }, "8"),
-      React.createElement("div", { id: "nine" }, "9")),
+      React.createElement("div", { id: "zero", onClick: this.sendToDisplay, "data-value": "0" }, "0"),
+      React.createElement("div", { id: "one", onClick: this.sendToDisplay, "data-value": "1" }, "1"),
+      React.createElement("div", { id: "two", onClick: this.sendToDisplay, "data-value": "2" }, "2"),
+      React.createElement("div", { id: "three", onClick: this.sendToDisplay, "data-value": "3" }, "3"),
+      React.createElement("div", { id: "four", onClick: this.sendToDisplay, "data-value": "4" }, "4"),
+      React.createElement("div", { id: "five", onClick: this.sendToDisplay, "data-value": "5" }, "5"),
+      React.createElement("div", { id: "six", onClick: this.sendToDisplay, "data-value": "6" }, "6"),
+      React.createElement("div", { id: "seven", onClick: this.sendToDisplay, "data-value": "7" }, "7"),
+      React.createElement("div", { id: "eight", onClick: this.sendToDisplay, "data-value": "8" }, "8"),
+      React.createElement("div", { id: "nine", onClick: this.sendToDisplay, "data-value": "9" }, "9")),
 
       React.createElement("div", { id: "functionality" },
       React.createElement("div", { id: "decimal" }, "."),

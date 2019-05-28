@@ -52,23 +52,25 @@ class CalculatorPad extends React.Component {
     this.sendToDisplay = this.sendToDisplay.bind(this);
   }
   sendToDisplay(e){
-    this.props.changeDisplay(e.target.id);
+    let displayText ;
+    const getDataValue = document.getElementById(e.target.id).getAttribute("data-value");
+    this.props.changeDisplay(getDataValue);
   }
   render() {
     return (
       <div id="pad">
         <h2>Pad Component</h2>
         <div id="numbers">
-          <div onClick={this.sendToDisplay} id="zero">0</div>
-          <div id="one">1</div>
-          <div id="two">2</div>
-          <div id="three">3</div>
-          <div id="four">4</div>
-          <div id="five">5</div>
-          <div id="six">6</div>
-          <div id="seven">7</div>
-          <div id="eight">8</div>
-          <div id="nine">9</div>
+          <div id="zero" onClick={this.sendToDisplay}  data-value="0">0</div>
+          <div id="one" onClick={this.sendToDisplay}  data-value="1">1</div>
+          <div id="two" onClick={this.sendToDisplay}  data-value="2">2</div>
+          <div id="three" onClick={this.sendToDisplay}  data-value="3">3</div>
+          <div id="four" onClick={this.sendToDisplay}  data-value="4">4</div>
+          <div id="five" onClick={this.sendToDisplay}  data-value="5">5</div>
+          <div id="six" onClick={this.sendToDisplay}  data-value="6">6</div>
+          <div id="seven" onClick={this.sendToDisplay}  data-value="7">7</div>
+          <div id="eight" onClick={this.sendToDisplay}  data-value="8">8</div>
+          <div id="nine" onClick={this.sendToDisplay}  data-value="9">9</div>
         </div>
         <div id="functionality">
           <div id="decimal">.</div>
