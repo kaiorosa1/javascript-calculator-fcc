@@ -13,23 +13,34 @@ class Calculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: " " };
+      text: " ",
+      preValue: 0,
+      oprator: "" };
 
     this.changeDisplay = this.changeDisplay.bind(this);
+    this.setPreValue = this.setPreValue.bind(this);
   }
   changeDisplay(newText) {
     this.setState({
       text: newText });
 
   }
+  // think of a better name for this function
+  setPreValue(val, op) {
+    this.setState({
+      preValue: val,
+      operator: op });
 
+  }
   render() {
     return (
       React.createElement("div", { id: "calculator" },
       React.createElement(Display, { text: this.state.text }),
       React.createElement(CalculatorPad, {
         text: this.state.text,
-        changeDisplay: this.changeDisplay })));
+        changeDisplay: this.changeDisplay,
+        setPreValue: this.setPreValue,
+        getValue: this.state.preValue })));
 
 
 
@@ -54,7 +65,8 @@ class CalculatorPad extends React.Component {
     super(props);
     this.sendToDisplay = this.sendToDisplay.bind(this);
     this.clearDisplay = this.clearDisplay.bind(this);
-    this.getOperator = this.getOperator.bind(this);
+    this.setOperation = this.setOperation.bind(this);
+    this.getResult = this.getResult.bind(this);
   }
   sendToDisplay(e) {
     const displayText = this.props.text;
@@ -70,17 +82,25 @@ class CalculatorPad extends React.Component {
     this.props.changeDisplay("0");
   }
 
-  getOperator(e) {
-    // Testing out 
-    let num = this.props.text;
-    alert(num);
-    alert(e.target.id);
+  setOperation(e) {
+
+    this.props.setPreValue(Number(this.props.text), e.target.id);
+    this.props.changeDisplay(" ");
+
+  }
+
+  getResult() {
+    // Verify operation
+
+    // Addition
+    let result = Number(this.props.text) + Number(this.props.getValue);
+
+    this.props.changeDisplay(result);
 
   }
   render() {
     return (
       React.createElement("div", { id: "pad" },
-      React.createElement("h2", null, "Pad Component"),
       React.createElement("div", { id: "numbers" },
       React.createElement("div", { id: "zero", onClick: this.sendToDisplay, "data-value": "0" }, "0"),
 
@@ -120,10 +140,12 @@ class CalculatorPad extends React.Component {
 
       React.createElement("div", { id: "multiply" }, "X"),
       React.createElement("div", { id: "divide" }, "/"),
-      React.createElement("div", { id: "add", onClick: this.getOperator }, "+"),
+      React.createElement("div", { id: "add", onClick: this.setOperation }, "+"),
+
+
       React.createElement("div", { id: "subtract" }, "-"),
       React.createElement("div", null, "Ans"),
-      React.createElement("div", { id: "equals" }, "="))));
+      React.createElement("div", { id: "equals", onClick: this.getResult }, "="))));
 
 
 
