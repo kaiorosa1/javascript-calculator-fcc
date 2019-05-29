@@ -79,7 +79,9 @@ class CalculatorPad extends React.Component {
     this.props.changeDisplay(displayedData);
   }
   clearDisplay() {
+    this.props.setPreValue(0,"");
     this.props.changeDisplay("0");
+    
   }
 
   setOperation(e) {
