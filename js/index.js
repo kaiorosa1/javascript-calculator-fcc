@@ -75,7 +75,11 @@ class CalculatorPad extends React.Component {
     getAttribute("data-value");
     let displayedData;
 
-    displayedData = displayText.concat(dataValue);
+    if (displayText !== "0") {
+      displayedData = displayText.concat(dataValue);
+    } else {
+      displayedData = "".concat(dataValue);
+    }
     this.props.changeDisplay(displayedData);
   }
   clearDisplay() {
