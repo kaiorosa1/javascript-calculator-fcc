@@ -40,7 +40,8 @@ class Calculator extends React.Component {
         text: this.state.text,
         changeDisplay: this.changeDisplay,
         setPreValue: this.setPreValue,
-        getValue: this.state.preValue })));
+        getValue: this.state.preValue,
+        getOperator: this.state.operator })));
 
 
 
@@ -96,10 +97,13 @@ class CalculatorPad extends React.Component {
   }
 
   getResult() {
+    let result = 0;
     // Verify operation
+    switch (this.props.getOperator) {
+      case 'add':
+        result = Number(this.props.text) + Number(this.props.getValue);
+        break;}
 
-    // Addition
-    let result = Number(this.props.text) + Number(this.props.getValue);
 
     this.props.changeDisplay(result);
 
