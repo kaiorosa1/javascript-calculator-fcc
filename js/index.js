@@ -60,7 +60,8 @@ class Calculator extends React.Component {
         setOperator: this.setOperator,
         setResult: this.setResult,
         getValue: this.state.preValue,
-        getOperator: this.state.operator })));
+        getOperator: this.state.operator,
+        getResult: this.state.result })));
 
 
 
@@ -115,25 +116,26 @@ class CalculatorPad extends React.Component {
   }
 
   getResult() {
-    let result = 0;
+    let result = this.props.getResult;
     // Verify operation
 
-    // use this.props.setResult 
+    // how to set the initial value for the result
+
     switch (this.props.getOperator) {
       case "add":
-        result = Number(this.props.text) + Number(this.props.getValue);
+        result += Number(this.props.text);
         break;
       case "subtract":
-        result = Number(this.props.text) - Number(this.props.getValue);
+        result -= Number(this.props.text);
         break;
       case "divide":
-        result = Number(this.props.text) / Number(this.props.getValue);
+        result /= Number(this.props.text);
         break;
       case "multiply":
-        result = Number(this.props.text) * Number(this.props.getValue);
+        result *= Number(this.props.text);
         break;}
 
-
+    this.props.setResult(result);
     this.props.setPreValue(Number(this.props.text));
     this.props.changeDisplay(result);
   }
