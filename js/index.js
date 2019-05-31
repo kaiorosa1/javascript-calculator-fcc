@@ -15,23 +15,32 @@ class Calculator extends React.Component {
     this.state = {
       text: " ",
       preValue: 0,
-      oprator: "" };
+      oprator: "",
+      result: 0 };
 
     this.changeDisplay = this.changeDisplay.bind(this);
     this.setPreValue = this.setPreValue.bind(this);
+    this.setOperator = this.setOperator.bind(this);
   }
+
   changeDisplay(newText) {
     this.setState({
       text: newText });
 
   }
-  // think of a better name for this function
-  setPreValue(val, op) {
+
+  setPreValue(val) {
     this.setState({
-      preValue: val,
+      preValue: val });
+
+  }
+
+  setOperator(op) {
+    this.setState({
       operator: op });
 
   }
+
   render() {
     return (
       React.createElement("div", { id: "calculator" },
@@ -40,6 +49,7 @@ class Calculator extends React.Component {
         text: this.state.text,
         changeDisplay: this.changeDisplay,
         setPreValue: this.setPreValue,
+        setOperator: this.setOperator,
         getValue: this.state.preValue,
         getOperator: this.state.operator })));
 
@@ -84,29 +94,37 @@ class CalculatorPad extends React.Component {
     this.props.changeDisplay(displayedData);
   }
   clearDisplay() {
-    this.props.setPreValue(0, "");
+    this.props.setPreValue(0);
+    this.props.setOperator("");
     this.props.changeDisplay("0");
-
   }
 
   setOperation(e) {
-
-    this.props.setPreValue(Number(this.props.text), e.target.id);
+    this.props.setPreValue(Number(this.props.text));
+    this.props.setOperator(e.target.id);
     this.props.changeDisplay(" ");
-
   }
 
   getResult() {
     let result = 0;
     // Verify operation
     switch (this.props.getOperator) {
-      case 'add':
+      case "add":
         result = Number(this.props.text) + Number(this.props.getValue);
+        break;
+      case "subtract":
+        result = Number(this.props.text) - Number(this.props.getValue);
+        break;
+      case "divide":
+        result = Number(this.props.text) / Number(this.props.getValue);
+        break;
+      case "multiply":
+        result = Number(this.props.text) * Number(this.props.getValue);
         break;}
 
 
+    this.props.setPreValue(Number(this.props.text));
     this.props.changeDisplay(result);
-
   }
   render() {
     return (
@@ -148,14 +166,22 @@ class CalculatorPad extends React.Component {
       React.createElement("div", { id: "clear", onClick: this.clearDisplay }, "AC"),
 
 
-      React.createElement("div", { id: "multiply" }, "X"),
-      React.createElement("div", { id: "divide" }, "/"),
+      React.createElement("div", { id: "multiply", onClick: this.setOperation }, "X"),
+
+
+      React.createElement("div", { id: "divide", onClick: this.setOperation }, "/"),
+
+
       React.createElement("div", { id: "add", onClick: this.setOperation }, "+"),
 
 
-      React.createElement("div", { id: "subtract" }, "-"),
+      React.createElement("div", { id: "subtract", onClick: this.getResult }, "-"),
+
+
       React.createElement("div", null, "Ans"),
       React.createElement("div", { id: "equals", onClick: this.getResult }, "="))));
+
+
 
 
 
