@@ -61,7 +61,7 @@ class Calculator extends React.Component {
           setResult = {this.setResult}
           getValue={this.state.preValue}
           getOperator={this.state.operator}
-          getResult = {this.state.result}
+          getStateResult = {this.state.result}
         />
       </div>
     );
@@ -89,6 +89,7 @@ class CalculatorPad extends React.Component {
     this.setOperation = this.setOperation.bind(this);
     this.getResult = this.getResult.bind(this);
   }
+  
   sendToDisplay(e) {
     const displayText = this.props.text;
     const dataValue = document
@@ -103,6 +104,7 @@ class CalculatorPad extends React.Component {
     }
     this.props.changeDisplay(displayedData);
   }
+  
   clearDisplay() {
     this.props.setPreValue(0);
     this.props.setOperator("");
@@ -112,15 +114,33 @@ class CalculatorPad extends React.Component {
   setOperation(e) {
     this.props.setPreValue(Number(this.props.text));
     this.props.setOperator(e.target.id);
+    
+    let result =  this.props.getStateResult;
+    // Verify operation
+    
+    switch (e.target.id) {
+      case "add":
+        result += Number(this.props.text);
+        break;
+      case "subtract":
+        result -= Number(this.props.text);
+        break;
+      case "divide":
+        result /= Number(this.props.text);
+        break;
+      case "multiply":
+        
+        result *= Number(this.props.text);
+        break;
+    }
+    
+    this.props.setResult(result);
     this.props.changeDisplay(" ");
   }
 
   getResult() {
-    let result =  this.props.getResult;
+    let result =  this.props.getStateResult;
     // Verify operation
-    
-    // how to set the initial value for the result
-    
     switch (this.props.getOperator) {
       case "add":
         result += Number(this.props.text);
@@ -135,10 +155,11 @@ class CalculatorPad extends React.Component {
         result *= Number(this.props.text);
         break;
     }
+    
     this.props.setResult(result);
-    this.props.setPreValue(Number(this.props.text));
-    this.props.changeDisplay(result);
+    this.props.changeDisplay(this.props.getStateResult);
   }
+  
   render() {
     return (
       <div id="pad">
@@ -188,7 +209,7 @@ class CalculatorPad extends React.Component {
           <div id="add" onClick={this.setOperation}>
             +
           </div>
-          <div id="subtract" onClick={this.getResult}>
+          <div id="subtract" onClick={this.setOperation}>
             -
           </div>
           <div>Ans</div>
@@ -199,6 +220,7 @@ class CalculatorPad extends React.Component {
       </div>
     );
   }
+  
 }
 
 ReactDOM.render(<App />, document.getElementById("app"));
