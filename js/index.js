@@ -104,7 +104,6 @@ class CalculatorPad extends React.Component {
     }
     this.props.changeDisplay(displayedData);
     if (Number(displayedData)) {
-      // alert(Number(displayedData));
       this.props.setResult(Number(displayedData));
     }
   }
@@ -117,55 +116,17 @@ class CalculatorPad extends React.Component {
   }
 
   setOperation(e) {
-    this.props.setPreValue(Number(this.props.text));
-    this.props.setOperator(e.target.id);
 
-    let result = this.props.getStateResult;
-    // Verify operation
-
-    switch (e.target.id) {
-      case "add":
-        result += this.props.getValue;
-        break;
-      case "subtract":
-        result -= this.props.getValue;
-        break;
-      case "divide":
-        result /= this.props.getValue;
-        break;
-      case "multiply":
-        result *= this.props.getValue;
-        break;}
-
-
-    this.props.setResult(result);
-    this.props.changeDisplay(" ");
+    const displayText = this.props.text;
+    const dataValue = document.getElementById(e.target.id).getAttribute("data-value");
+    let displayedData;
+    // concatenate the operations in one string
+    displayedData = displayText.concat(dataValue);
+    this.props.changeDisplay(displayedData);
   }
 
   getResult() {
-    this.props.setPreValue(Number(this.props.text));
-    let result = this.props.getStateResult;
-    // Verify operation
-    switch (this.props.getOperator) {
-      case "add":
-        result += this.props.getValue;
-        break;
-      case "subtract":
-        result -= this.props.getValue;
-        break;
-      case "divide":
-        result /= this.props.getValue;
-        break;
-      case "multiply":
-        result *= this.props.getValue;
-        break;
-      default:}
-
-
-
-    this.props.setResult(result);
-    // alert(result);
-    this.props.changeDisplay(result);
+    alert("handle the operations");
   }
 
   render() {
@@ -208,7 +169,7 @@ class CalculatorPad extends React.Component {
       React.createElement("div", { id: "clear", onClick: this.clearDisplay }, "AC"),
 
 
-      React.createElement("div", { id: "multiply", onClick: this.setOperation, "data-value": "." }, "X"),
+      React.createElement("div", { id: "multiply", onClick: this.setOperation, "data-value": "*" }, "X"),
 
 
       React.createElement("div", { id: "divide", onClick: this.setOperation, "data-value": "/" }, "/"),
