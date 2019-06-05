@@ -105,6 +105,9 @@ class CalculatorPad extends React.Component {
     const dataValue = document.
     getElementById(e.target.id).
     getAttribute("data-value");
+
+    // handle the decimals point issue before pushing into the values array
+
     this.props.getValues.push(dataValue);
 
     let displayedData;
@@ -130,6 +133,7 @@ class CalculatorPad extends React.Component {
     const dataValue = document.
     getElementById(e.target.id).
     getAttribute("data-value");
+
     this.props.getOperator.push(dataValue);
     let displayedData;
     // concatenate the operations in one string
@@ -169,8 +173,8 @@ class CalculatorPad extends React.Component {
       // removes the first operator
       this.props.getOperator.shift();
     }
-    this.props.changeDisplay(result);
-    // alert("NumbersArray = "+ this.props.getValues + "OperatorsArray = "+ this.props.getOperator);
+
+    this.props.changeDisplay(String(result));
   }
 
   render() {
