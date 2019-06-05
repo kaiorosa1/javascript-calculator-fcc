@@ -14,12 +14,13 @@ class Calculator extends React.Component {
     super(props);
     this.state = {
       text: " ",
-      preValue: 0,
-      operator: "",
+      values: [],
+      currentValue: 0,
+      operator: [],
       result:0
     };
     this.changeDisplay = this.changeDisplay.bind(this);
-    this.setPreValue = this.setPreValue.bind(this);
+    this.setCurrentValue = this.setCurrentValue.bind(this);
     this.setOperator = this.setOperator.bind(this);
     this.setResult = this.setResult.bind(this);
   }
@@ -30,9 +31,9 @@ class Calculator extends React.Component {
     });
   }
 
-  setPreValue(val) {
+  setCurrentValue(val) {
     this.setState({
-      preValue: val
+      currentValue: val
     });
   }
 
@@ -56,7 +57,7 @@ class Calculator extends React.Component {
         <CalculatorPad
           text={this.state.text}
           changeDisplay={this.changeDisplay}
-          setPreValue={this.setPreValue}
+          setCurrentValue={this.setCurrentValue}
           setOperator={this.setOperator}
           setResult = {this.setResult}
           getValue={this.state.preValue}
@@ -109,7 +110,7 @@ class CalculatorPad extends React.Component {
   }
   
   clearDisplay() {
-    this.props.setPreValue(0);
+    this.props.setCurrentValue(0);
     this.props.setOperator("");
     this.props.setResult(0);
     this.props.changeDisplay("0");
