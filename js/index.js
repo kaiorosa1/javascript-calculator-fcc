@@ -16,7 +16,7 @@ class Calculator extends React.Component {
       text: " ",
       values: [],
       currentValue: 0,
-      operator: [],
+      operators: [],
       result: 0 };
 
     this.changeDisplay = this.changeDisplay.bind(this);
@@ -37,6 +37,7 @@ class Calculator extends React.Component {
 
   }
 
+  // fix this function
   setOperator(op) {
     this.setState({
       operator: op });
@@ -60,8 +61,9 @@ class Calculator extends React.Component {
         setCurrentValue: this.setCurrentValue,
         setOperator: this.setOperator,
         setResult: this.setResult,
-        getValue: this.state.preValue,
-        getOperator: this.state.operator,
+        getCurrentValue: this.state.currentValue,
+        getOperator: this.state.operators,
+        getValues: this.state.values,
         getStateResult: this.state.result })));
 
 
@@ -93,9 +95,9 @@ class CalculatorPad extends React.Component {
 
   sendToDisplay(e) {
     const displayText = this.props.text;
-    const dataValue = document.
-    getElementById(e.target.id).
-    getAttribute("data-value");
+    const dataValue = document.getElementById(e.target.id).getAttribute("data-value");
+    this.props.getValues.push(dataValue);
+
     let displayedData;
 
     if (displayText !== "0") {
@@ -104,14 +106,12 @@ class CalculatorPad extends React.Component {
       displayedData = "".concat(dataValue);
     }
     this.props.changeDisplay(displayedData);
-    if (Number(displayedData)) {
-      this.props.setResult(Number(displayedData));
-    }
+
   }
 
   clearDisplay() {
     this.props.setCurrentValue(0);
-    this.props.setOperator("");
+    this.props.setOperator([]);
     this.props.setResult(0);
     this.props.changeDisplay("0");
   }
@@ -120,6 +120,7 @@ class CalculatorPad extends React.Component {
 
     const displayText = this.props.text;
     const dataValue = document.getElementById(e.target.id).getAttribute("data-value");
+    this.props.getOperator.push(dataValue);
     let displayedData;
     // concatenate the operations in one string
     displayedData = displayText.concat(dataValue);
@@ -127,7 +128,9 @@ class CalculatorPad extends React.Component {
   }
 
   getResult() {
-    alert("handle the operations");
+    let expression = this.props.text;
+    this.props.changeDisplay("");
+    alert("NumbersArray = " + this.props.getValues + "OperatorsArray = " + this.props.getOperator);
   }
 
   render() {
