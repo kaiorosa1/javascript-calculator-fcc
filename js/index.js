@@ -21,6 +21,7 @@ class Calculator extends React.Component {
 
     this.changeDisplay = this.changeDisplay.bind(this);
     this.setCurrentValue = this.setCurrentValue.bind(this);
+    this.setValues = this.setValues.bind(this);
     this.setOperator = this.setOperator.bind(this);
     this.setResult = this.setResult.bind(this);
   }
@@ -40,7 +41,13 @@ class Calculator extends React.Component {
   // fix this function
   setOperator(op) {
     this.setState({
-      operator: op });
+      operators: op });
+
+  }
+
+  setValues(val) {
+    this.setState({
+      values: val });
 
   }
 
@@ -50,7 +57,6 @@ class Calculator extends React.Component {
 
   }
 
-
   render() {
     return (
       React.createElement("div", { id: "calculator" },
@@ -59,6 +65,7 @@ class Calculator extends React.Component {
         text: this.state.text,
         changeDisplay: this.changeDisplay,
         setCurrentValue: this.setCurrentValue,
+        setValues: this.setValues,
         setOperator: this.setOperator,
         setResult: this.setResult,
         getCurrentValue: this.state.currentValue,
@@ -95,7 +102,9 @@ class CalculatorPad extends React.Component {
 
   sendToDisplay(e) {
     const displayText = this.props.text;
-    const dataValue = document.getElementById(e.target.id).getAttribute("data-value");
+    const dataValue = document.
+    getElementById(e.target.id).
+    getAttribute("data-value");
     this.props.getValues.push(dataValue);
 
     let displayedData;
@@ -106,20 +115,21 @@ class CalculatorPad extends React.Component {
       displayedData = "".concat(dataValue);
     }
     this.props.changeDisplay(displayedData);
-
   }
 
   clearDisplay() {
     this.props.setCurrentValue(0);
+    this.props.setValues([]);
     this.props.setOperator([]);
     this.props.setResult(0);
     this.props.changeDisplay("0");
   }
 
   setOperation(e) {
-
     const displayText = this.props.text;
-    const dataValue = document.getElementById(e.target.id).getAttribute("data-value");
+    const dataValue = document.
+    getElementById(e.target.id).
+    getAttribute("data-value");
     this.props.getOperator.push(dataValue);
     let displayedData;
     // concatenate the operations in one string
@@ -129,8 +139,38 @@ class CalculatorPad extends React.Component {
 
   getResult() {
     let expression = this.props.text;
-    this.props.changeDisplay("");
-    alert("NumbersArray = " + this.props.getValues + "OperatorsArray = " + this.props.getOperator);
+    let result = Number(this.props.getValues[0]);
+
+    while (this.props.getValues.length != 1) {
+      switch (this.props.getOperator[0]) {
+        case "+":
+          result =
+          Number(this.props.getValues[0]) + Number(this.props.getValues[1]);
+          break;
+        case "-":
+          result =
+          Number(this.props.getValues[0]) - Number(this.props.getValues[1]);
+          break;
+        case "*":
+          result =
+          Number(this.props.getValues[0]) * Number(this.props.getValues[1]);
+          break;
+        case "/":
+          result =
+          Number(this.props.getValues[0]) / Number(this.props.getValues[1]);
+          break;}
+
+
+      // removes the previous numbers operated on
+      this.props.getValues.shift();
+      this.props.getValues.shift();
+      // add the result in the first position of the array
+      this.props.getValues.unshift(result);
+      // removes the first operator
+      this.props.getOperator.shift();
+    }
+    this.props.changeDisplay(result);
+    // alert("NumbersArray = "+ this.props.getValues + "OperatorsArray = "+ this.props.getOperator);
   }
 
   render() {
@@ -170,6 +210,8 @@ class CalculatorPad extends React.Component {
 
       React.createElement("div", { id: "functionality" },
       React.createElement("div", { id: "decimal", onClick: this.sendToDisplay, "data-value": "." }, "."),
+
+
       React.createElement("div", { id: "clear", onClick: this.clearDisplay }, "AC"),
 
 
@@ -193,7 +235,6 @@ class CalculatorPad extends React.Component {
 
 
   }}
-
 
 
 ReactDOM.render(React.createElement(App, null), document.getElementById("app"));
