@@ -15,7 +15,7 @@ class Calculator extends React.Component {
     this.state = {
       text: " ",
       values: [],
-      currentValue: 0,
+      currentValue: "",
       operators: [],
       result: 0 };
 
@@ -108,8 +108,6 @@ class CalculatorPad extends React.Component {
 
     // handle the decimals point issue before pushing into the values array
 
-    this.props.getValues.push(dataValue);
-
     let displayedData;
 
     if (displayText !== "0") {
@@ -117,6 +115,7 @@ class CalculatorPad extends React.Component {
     } else {
       displayedData = "".concat(dataValue);
     }
+    this.props.setCurrentValue(this.props.getCurrentValue.concat(dataValue));
     this.props.changeDisplay(displayedData);
   }
 
@@ -130,6 +129,8 @@ class CalculatorPad extends React.Component {
 
   setOperation(e) {
     const displayText = this.props.text;
+    this.props.getValues.push(this.props.getCurrentValue);
+
     const dataValue = document.
     getElementById(e.target.id).
     getAttribute("data-value");
@@ -139,12 +140,15 @@ class CalculatorPad extends React.Component {
     // concatenate the operations in one string
     displayedData = displayText.concat(dataValue);
     this.props.changeDisplay(displayedData);
+    this.props.setCurrentValue("");
   }
 
   getResult() {
     let expression = this.props.text;
-    let result = Number(this.props.getValues[0]);
-
+    let result = Number(this.props.getCurrentValue);
+    // solve this issue of push too many values
+    this.props.getValues.push(this.props.getCurrentValue);
+    alert(this.props.getValues);
     while (this.props.getValues.length != 1) {
       switch (this.props.getOperator[0]) {
         case "+":
@@ -213,7 +217,7 @@ class CalculatorPad extends React.Component {
 
 
       React.createElement("div", { id: "functionality" },
-      React.createElement("div", { id: "decimal", onClick: this.sendToDisplay, "data-value": "." }, "."),
+      React.createElement("div", { id: "decimal", onClick: 2, "data-value": "." }, "."),
 
 
       React.createElement("div", { id: "clear", onClick: this.clearDisplay }, "AC"),
