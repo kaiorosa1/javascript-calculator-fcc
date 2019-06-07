@@ -199,18 +199,15 @@ class CalculatorPad extends React.Component {
   render() {
     return (
       <div id="pad">
-        <div id="numbers">
-          <button id="zero" onClick={this.sendToDisplay} data-value="0">
-            0
+        <div id="numbers"> 
+          <button id="seven" onClick={this.sendToDisplay} data-value="7">
+            7
           </button>
-          <button id="one" onClick={this.sendToDisplay} data-value="1">
-            1
+          <button id="eight" onClick={this.sendToDisplay} data-value="8">
+            8
           </button>
-          <button id="two" onClick={this.sendToDisplay} data-value="2">
-            2
-          </button>
-          <button id="three" onClick={this.sendToDisplay} data-value="3">
-            3
+          <button id="nine" onClick={this.sendToDisplay} data-value="9">
+            9
           </button>
           <button id="four" onClick={this.sendToDisplay} data-value="4">
             4
@@ -221,20 +218,25 @@ class CalculatorPad extends React.Component {
           <button id="six" onClick={this.sendToDisplay} data-value="6">
             6
           </button>
-          <button id="seven" onClick={this.sendToDisplay} data-value="7">
-            7
+          <button id="one" onClick={this.sendToDisplay} data-value="1">
+            1
           </button>
-          <button id="eight" onClick={this.sendToDisplay} data-value="8">
-            8
+          <button id="two" onClick={this.sendToDisplay} data-value="2">
+            2
           </button>
-          <button id="nine" onClick={this.sendToDisplay} data-value="9">
-            9
+          <button id="three" onClick={this.sendToDisplay} data-value="3">
+            3
           </button>
-        </div>
-        <div id="functionality">
+          <button id="zero" onClick={this.sendToDisplay} data-value="0">
+            0
+          </button>
           <button id="decimal" onClick={this.sendToDisplay} data-value=".">
             .
           </button>
+          <button>exp</button>
+        </div>
+        <div id="functionality">
+          <button>DEL</button>
           <button id="clear" onClick={this.clearDisplay}>
             AC
           </button>
@@ -251,6 +253,7 @@ class CalculatorPad extends React.Component {
             -
           </button>
           <button>Ans</button>
+          
           <button id="equals" onClick={this.getResult} data-value="=">
             =
           </button>

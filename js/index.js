@@ -200,16 +200,13 @@ class CalculatorPad extends React.Component {
     return (
       React.createElement("div", { id: "pad" },
       React.createElement("div", { id: "numbers" },
-      React.createElement("button", { id: "zero", onClick: this.sendToDisplay, "data-value": "0" }, "0"),
+      React.createElement("button", { id: "seven", onClick: this.sendToDisplay, "data-value": "7" }, "7"),
 
 
-      React.createElement("button", { id: "one", onClick: this.sendToDisplay, "data-value": "1" }, "1"),
+      React.createElement("button", { id: "eight", onClick: this.sendToDisplay, "data-value": "8" }, "8"),
 
 
-      React.createElement("button", { id: "two", onClick: this.sendToDisplay, "data-value": "2" }, "2"),
-
-
-      React.createElement("button", { id: "three", onClick: this.sendToDisplay, "data-value": "3" }, "3"),
+      React.createElement("button", { id: "nine", onClick: this.sendToDisplay, "data-value": "9" }, "9"),
 
 
       React.createElement("button", { id: "four", onClick: this.sendToDisplay, "data-value": "4" }, "4"),
@@ -221,20 +218,25 @@ class CalculatorPad extends React.Component {
       React.createElement("button", { id: "six", onClick: this.sendToDisplay, "data-value": "6" }, "6"),
 
 
-      React.createElement("button", { id: "seven", onClick: this.sendToDisplay, "data-value": "7" }, "7"),
+      React.createElement("button", { id: "one", onClick: this.sendToDisplay, "data-value": "1" }, "1"),
 
 
-      React.createElement("button", { id: "eight", onClick: this.sendToDisplay, "data-value": "8" }, "8"),
+      React.createElement("button", { id: "two", onClick: this.sendToDisplay, "data-value": "2" }, "2"),
 
 
-      React.createElement("button", { id: "nine", onClick: this.sendToDisplay, "data-value": "9" }, "9")),
+      React.createElement("button", { id: "three", onClick: this.sendToDisplay, "data-value": "3" }, "3"),
 
 
+      React.createElement("button", { id: "zero", onClick: this.sendToDisplay, "data-value": "0" }, "0"),
 
-      React.createElement("div", { id: "functionality" },
+
       React.createElement("button", { id: "decimal", onClick: this.sendToDisplay, "data-value": "." }, "."),
 
 
+      React.createElement("button", null, "exp")),
+
+      React.createElement("div", { id: "functionality" },
+      React.createElement("button", null, "DEL"),
       React.createElement("button", { id: "clear", onClick: this.clearDisplay }, "AC"),
 
 
@@ -251,6 +253,7 @@ class CalculatorPad extends React.Component {
 
 
       React.createElement("button", null, "Ans"),
+
       React.createElement("button", { id: "equals", onClick: this.getResult, "data-value": "=" }, "="))));
 
 
