@@ -2,7 +2,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>JavaScript Calculator</h1>
+        <h1>JavaScript Calculator (FCC)</h1>
         <Calculator />
       </div>
     );
@@ -59,6 +59,7 @@ class Calculator extends React.Component {
   render() {
     return (
       <div id="calculator">
+        <h4>JavaScript Calculator</h4>
         <Display text={this.state.text} />
         <CalculatorPad
           text={this.state.text}
@@ -236,8 +237,8 @@ class CalculatorPad extends React.Component {
           <button>exp</button>
         </div>
         <div id="functionality">
-          <button>DEL</button>
-          <button id="clear" onClick={this.clearDisplay}>
+          <button class="red-btn">DEL</button>
+          <button class="red-btn" id="clear" onClick={this.clearDisplay}>
             AC
           </button>
           <button id="multiply" onClick={this.setOperation} data-value="*">

@@ -2,7 +2,7 @@ class App extends React.Component {
   render() {
     return (
       React.createElement("div", null,
-      React.createElement("h1", null, "JavaScript Calculator"),
+      React.createElement("h1", null, "JavaScript Calculator (FCC)"),
       React.createElement(Calculator, null)));
 
 
@@ -59,6 +59,7 @@ class Calculator extends React.Component {
   render() {
     return (
       React.createElement("div", { id: "calculator" },
+      React.createElement("h4", null, "JavaScript Calculator"),
       React.createElement(Display, { text: this.state.text }),
       React.createElement(CalculatorPad, {
         text: this.state.text,
@@ -236,8 +237,8 @@ class CalculatorPad extends React.Component {
       React.createElement("button", null, "exp")),
 
       React.createElement("div", { id: "functionality" },
-      React.createElement("button", null, "DEL"),
-      React.createElement("button", { id: "clear", onClick: this.clearDisplay }, "AC"),
+      React.createElement("button", { class: "red-btn" }, "DEL"),
+      React.createElement("button", { class: "red-btn", id: "clear", onClick: this.clearDisplay }, "AC"),
 
 
       React.createElement("button", { id: "multiply", onClick: this.setOperation, "data-value": "*" }, "X"),
