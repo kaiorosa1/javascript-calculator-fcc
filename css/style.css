@@ -10,11 +10,16 @@
 }
 #pad {
   border: 5px solid blue;
+  display: flex;
 }
 #numbers {
   border: 5px solid green;
+  display: grid;
+  width: 75%;
 }
 
 #functionality {
   border: 5px solid purple;
+  display: grid;
+  width: 25%;
 }

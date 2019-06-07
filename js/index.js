@@ -38,7 +38,6 @@ class Calculator extends React.Component {
 
   }
 
-  // fix this function
   setOperator(op) {
     this.setState({
       operators: op });
@@ -201,58 +200,58 @@ class CalculatorPad extends React.Component {
     return (
       React.createElement("div", { id: "pad" },
       React.createElement("div", { id: "numbers" },
-      React.createElement("div", { id: "zero", onClick: this.sendToDisplay, "data-value": "0" }, "0"),
+      React.createElement("button", { id: "zero", onClick: this.sendToDisplay, "data-value": "0" }, "0"),
 
 
-      React.createElement("div", { id: "one", onClick: this.sendToDisplay, "data-value": "1" }, "1"),
+      React.createElement("button", { id: "one", onClick: this.sendToDisplay, "data-value": "1" }, "1"),
 
 
-      React.createElement("div", { id: "two", onClick: this.sendToDisplay, "data-value": "2" }, "2"),
+      React.createElement("button", { id: "two", onClick: this.sendToDisplay, "data-value": "2" }, "2"),
 
 
-      React.createElement("div", { id: "three", onClick: this.sendToDisplay, "data-value": "3" }, "3"),
+      React.createElement("button", { id: "three", onClick: this.sendToDisplay, "data-value": "3" }, "3"),
 
 
-      React.createElement("div", { id: "four", onClick: this.sendToDisplay, "data-value": "4" }, "4"),
+      React.createElement("button", { id: "four", onClick: this.sendToDisplay, "data-value": "4" }, "4"),
 
 
-      React.createElement("div", { id: "five", onClick: this.sendToDisplay, "data-value": "5" }, "5"),
+      React.createElement("button", { id: "five", onClick: this.sendToDisplay, "data-value": "5" }, "5"),
 
 
-      React.createElement("div", { id: "six", onClick: this.sendToDisplay, "data-value": "6" }, "6"),
+      React.createElement("button", { id: "six", onClick: this.sendToDisplay, "data-value": "6" }, "6"),
 
 
-      React.createElement("div", { id: "seven", onClick: this.sendToDisplay, "data-value": "7" }, "7"),
+      React.createElement("button", { id: "seven", onClick: this.sendToDisplay, "data-value": "7" }, "7"),
 
 
-      React.createElement("div", { id: "eight", onClick: this.sendToDisplay, "data-value": "8" }, "8"),
+      React.createElement("button", { id: "eight", onClick: this.sendToDisplay, "data-value": "8" }, "8"),
 
 
-      React.createElement("div", { id: "nine", onClick: this.sendToDisplay, "data-value": "9" }, "9")),
+      React.createElement("button", { id: "nine", onClick: this.sendToDisplay, "data-value": "9" }, "9")),
 
 
 
       React.createElement("div", { id: "functionality" },
-      React.createElement("div", { id: "decimal", onClick: this.sendToDisplay, "data-value": "." }, "."),
+      React.createElement("button", { id: "decimal", onClick: this.sendToDisplay, "data-value": "." }, "."),
 
 
-      React.createElement("div", { id: "clear", onClick: this.clearDisplay }, "AC"),
+      React.createElement("button", { id: "clear", onClick: this.clearDisplay }, "AC"),
 
 
-      React.createElement("div", { id: "multiply", onClick: this.setOperation, "data-value": "*" }, "X"),
+      React.createElement("button", { id: "multiply", onClick: this.setOperation, "data-value": "*" }, "X"),
 
 
-      React.createElement("div", { id: "divide", onClick: this.setOperation, "data-value": "/" }, "/"),
+      React.createElement("button", { id: "divide", onClick: this.setOperation, "data-value": "/" }, "/"),
 
 
-      React.createElement("div", { id: "add", onClick: this.setOperation, "data-value": "+" }, "+"),
+      React.createElement("button", { id: "add", onClick: this.setOperation, "data-value": "+" }, "+"),
 
 
-      React.createElement("div", { id: "subtract", onClick: this.setOperation, "data-value": "-" }, "-"),
+      React.createElement("button", { id: "subtract", onClick: this.setOperation, "data-value": "-" }, "-"),
 
 
-      React.createElement("div", null, "Ans"),
-      React.createElement("div", { id: "equals", onClick: this.getResult, "data-value": "=" }, "="))));
+      React.createElement("button", null, "Ans"),
+      React.createElement("button", { id: "equals", onClick: this.getResult, "data-value": "=" }, "="))));
 
 
 
