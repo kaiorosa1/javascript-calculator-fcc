@@ -106,21 +106,27 @@ class CalculatorPad extends React.Component {
     getElementById(e.target.id).
     getAttribute("data-value");
 
-    // handle the decimals point issue before pushing into the values array
+    let displayedData = this.props.text;
+    // it only includes the dot once in every value
+    if (!(this.props.getCurrentValue.includes(".") && dataValue == ".")) {
+      if (displayText !== "0") {
+        displayedData = displayText.concat(dataValue);
+      } else
+      {
+        displayedData = "".concat(dataValue);
+      }
 
-    let displayedData;
-
-    if (displayText !== "0") {
-      displayedData = displayText.concat(dataValue);
+      this.props.setCurrentValue(this.props.getCurrentValue.concat(dataValue));
     } else {
-      displayedData = "".concat(dataValue);
+      this.props.setCurrentValue(displayedData);
     }
-    this.props.setCurrentValue(this.props.getCurrentValue.concat(dataValue));
+
+
     this.props.changeDisplay(displayedData);
   }
 
   clearDisplay() {
-    this.props.setCurrentValue(0);
+    this.props.setCurrentValue("");
     this.props.setValues([]);
     this.props.setOperator([]);
     this.props.setResult(0);
@@ -129,26 +135,35 @@ class CalculatorPad extends React.Component {
 
   setOperation(e) {
     const displayText = this.props.text;
-    this.props.getValues.push(this.props.getCurrentValue);
+    // add values to array de values
+    if (this.props.getCurrentValue != "") {
+      this.props.getValues.push(this.props.getCurrentValue);
+    }
+
 
     const dataValue = document.
     getElementById(e.target.id).
     getAttribute("data-value");
 
     this.props.getOperator.push(dataValue);
+    // if there's more op than values shift it
+    if (this.props.getOperator.length > this.props.getValues.length) {
+      this.props.getOperator.shift();
+    }
+
     let displayedData;
     // concatenate the operations in one string
     displayedData = displayText.concat(dataValue);
     this.props.changeDisplay(displayedData);
     this.props.setCurrentValue("");
+
   }
 
   getResult() {
     let expression = this.props.text;
     let result = Number(this.props.getCurrentValue);
-    // solve this issue of push too many values
     this.props.getValues.push(this.props.getCurrentValue);
-    alert(this.props.getValues);
+    // alert(this.props.getValues);
     while (this.props.getValues.length != 1) {
       switch (this.props.getOperator[0]) {
         case "+":
@@ -177,7 +192,8 @@ class CalculatorPad extends React.Component {
       // removes the first operator
       this.props.getOperator.shift();
     }
-
+    this.props.getValues.shift();
+    this.props.setCurrentValue(result);
     this.props.changeDisplay(String(result));
   }
 
@@ -217,7 +233,7 @@ class CalculatorPad extends React.Component {
 
 
       React.createElement("div", { id: "functionality" },
-      React.createElement("div", { id: "decimal", onClick: 2, "data-value": "." }, "."),
+      React.createElement("div", { id: "decimal", onClick: this.sendToDisplay, "data-value": "." }, "."),
 
 
       React.createElement("div", { id: "clear", onClick: this.clearDisplay }, "AC"),
